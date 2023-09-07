@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fbnext-deployment
+spec:
+  replicas: 3 # You can adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: fbnext-app
+  template:
+    metadata:
+      labels:
+        app: fbnext-app
+    spec:
+      containers:
+        - name: fbnext-container
+          image: harbor.freshbrewed.science/freshbrewedprivate/testingnext:0.0.1
+          ports:
+            - containerPort: 3000
+      imagePullSecrets:
+      - name: myharborreg
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fbnext-service
+spec:
+  selector:
+    app: fbnext-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: ClusterIP
