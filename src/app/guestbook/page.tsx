@@ -7,11 +7,7 @@ export const metadata = {
 };
 
 // <!-- use http://caius.github.io/github_id/ -->
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const page = () => {
   return (
             <div className="flex flex-col gap-2 justify-center">
               <h2 className="mb-0 text-zinc-100 font-bold">and</h2>
@@ -21,3 +17,5 @@ export default function RootLayout({
             </div>
   );
 }
+
+export default page;

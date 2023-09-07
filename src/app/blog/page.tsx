@@ -20,7 +20,7 @@ const page = () => {
       <main className="flex flex-col gap-2">
         <h1 className="mb-0 text-zinc-100 font-bold">Blogs 📚</h1>
         <p className="mb-0 text-zinc-400 font-semibold leading-none">
-          All the blogs that I have written can be found here, mostly I'll try
+          All the blogs that I have written can be found here, mostly I&apos;ll try
           to put here all the cool tips and triks in frontend development and my
           learnings and experiments or rather anything which seems cool to me
         </p>
