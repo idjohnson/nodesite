@@ -97,7 +97,11 @@ jobs:
       - name: SetupDemoKConfig
         run: |
           echo ${{ secrets.KCONFIGTEST }} | base64 --decode > /tmp/kconfig
-          kubectl get nodes --insecure-skip-tls-verify --kubeconfig=/home/builder/.kube/config
+          kubectl get nodes --insecure-skip-tls-verify --kubeconfig=/tmp/kconfig
 
           # Deploy
-          kubectl apply -f ./deploy/k8sRSGH.yaml --insecure-skip-tls-verify --kubeconfig=/home/builder/.kube/config
+          kubectl apply -f ./deploy/k8sRSGH.yaml --insecure-skip-tls-verify --kubeconfig=/tmp/kconfig
+
+      - name: Test
+        run: |
+          kubectl get nodes --insecure-skip-tls-verify --kubeconfig=/tmp/kconfig
