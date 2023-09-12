@@ -93,3 +93,11 @@ jobs:
         # This step uses the identity token to provision an ephemeral certificate
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
+
+      - name: SetupDemoKConfig
+        run: |
+          echo ${{ secrets.KCONFIGTEST }} | base64 --decode > /tmp/kconfig
+          kubectl get nodes --insecure-skip-tls-verify --kubeconfig=/home/builder/.kube/config
+
+          # Deploy
+          kubectl apply -f ./deploy/k8sRSGH.yaml --insecure-skip-tls-verify --kubeconfig=/home/builder/.kube/config
