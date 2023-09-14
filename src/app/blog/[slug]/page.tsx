@@ -1,10 +1,10 @@
 import fs from "fs";
+import Tag from "@/app/components/common/Tag";
+import getPostMetadata from "@/app/libs/Metadata/getPostMetadata";
 import matter from "gray-matter";
 import Markdown from "markdown-to-jsx";
-import getPostMetadata from "@/app/libs/Metadata/getPostMetadata";
 import Link from "next/link";
 import { AiOutlineCaretLeft } from "react-icons/ai";
-import Tag from "@/app/components/common/Tag";
 
 const getPostContent = (slug: string) => {
 	const folder = "content/posts";

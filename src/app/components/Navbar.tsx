@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const navItems = [
 	{

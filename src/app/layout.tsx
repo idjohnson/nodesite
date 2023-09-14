@@ -1,5 +1,5 @@
-import "./globals.css";
 import NavBar from "@/app/components/Navbar";
+import "./globals.css";
 
 export const metadata = {
 	title: "Create NextJS App",

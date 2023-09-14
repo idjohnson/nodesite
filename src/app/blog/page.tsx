@@ -1,8 +1,8 @@
-import "../globals.css";
 import NavBar from "@/app/components/Navbar";
+import "../globals.css";
 
-import PostPreview from "@/app/components/preview/PostPreview";
 import UnderLine from "@/app/components/common/UnderLine";
+import PostPreview from "@/app/components/preview/PostPreview";
 import getPostMetadata from "@/app/libs/Metadata/getPostMetadata";
 import PageWrapper from "@/app/providers/PageWrapper";
 

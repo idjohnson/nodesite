@@ -7,6 +7,10 @@ RUN npm install -g pnpm
 # install dependencies
 RUN pnpm install
 COPY . .
+
+# ci check 
+RUN pnpm biome ci ./src/
+
 # build
 RUN pnpm build
 # remove dev dependencies
