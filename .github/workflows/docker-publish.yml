@@ -35,6 +35,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - run: npm install
+
+      - run: npm run lint
+      
+      - run: npm run biomelint
+
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
       - name: Install cosign
