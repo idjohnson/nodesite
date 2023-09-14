@@ -9,6 +9,7 @@ RUN pnpm install
 COPY . .
 
 # ci check 
+COPY biome.json ./
 RUN pnpm biome ci ./src/
 
 # build
