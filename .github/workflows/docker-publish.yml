@@ -21,8 +21,7 @@ env:
 
 
 jobs:
-  build:
-
+  ciCheck:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -45,7 +44,19 @@ jobs:
       - run: npm run lint
 
       - run: npm run biomecheck
+      
+  build:
+    dependsOn: ciCheck
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      # This is used to complete the identity challenge
+      # with sigstore/fulcio when running outside of PRs.
+      id-token: write
 
+    steps:
+    runs-on: ubuntu-latest
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
       - name: Install cosign
