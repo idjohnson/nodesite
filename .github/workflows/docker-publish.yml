@@ -119,6 +119,7 @@ jobs:
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
 
       - name: SetupDemoKConfig
+        if: ${{ github.event_name != 'pull_request' }}
         run: |
           echo ${{ secrets.KCONFIGTEST }} | base64 --decode > /tmp/kconfig
           kubectl get nodes --insecure-skip-tls-verify --kubeconfig=/tmp/kconfig
