@@ -10,6 +10,8 @@ COPY . .
 
 # ci check 
 COPY biome.json ./
+RUN pnpm biome init
+COPY biome.json ./
 RUN pnpm biome check ./src/
 
 # build
