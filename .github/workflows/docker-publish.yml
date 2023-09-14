@@ -44,9 +44,9 @@ jobs:
       - run: npm run lint
 
       - run: npm run biomecheck
-      
+
   build:
-    dependsOn: ciCheck
+    needs: ciCheck
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -56,7 +56,6 @@ jobs:
       id-token: write
 
     steps:
-    runs-on: ubuntu-latest
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer
       - name: Install cosign
