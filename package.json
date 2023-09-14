@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "biomecheck": "pnpm biome check ./src/"
+    "biomecheck": "biome check ./src/"
   },
   "dependencies": {
     "@types/node": "20.5.8",

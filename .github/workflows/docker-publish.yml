@@ -43,8 +43,8 @@ jobs:
       - run: npm install
 
       - run: npm run lint
-      
-      - run: npm run biomelint
+
+      - run: npm run biomecheck
 
       # Install the cosign tool except on PR
       # https://github.com/sigstore/cosign-installer

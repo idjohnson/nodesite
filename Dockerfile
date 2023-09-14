@@ -8,10 +8,6 @@ RUN npm install -g pnpm
 RUN pnpm install
 COPY . .
 
-# ci check 
-COPY biome.json ./
-RUN npm run biomecheck
-
 # build
 RUN pnpm build
 # remove dev dependencies
