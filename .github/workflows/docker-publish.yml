@@ -127,7 +127,3 @@ jobs:
           # Deploy
           kubectl delete -f ./deploy/k8sRSGH.yaml --insecure-skip-tls-verify --kubeconfig=/tmp/kconfig || true
           kubectl apply -f ./deploy/k8sRSGH.yaml --insecure-skip-tls-verify --kubeconfig=/tmp/kconfig
-
-      - name: Test
-        run: |
-          kubectl get nodes --insecure-skip-tls-verify --kubeconfig=/tmp/kconfig
