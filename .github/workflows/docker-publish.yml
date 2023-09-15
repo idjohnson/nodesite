@@ -121,7 +121,15 @@ jobs:
       - name: SetupDemoKConfig
         if: ${{ github.event_name != 'pull_request' }}
         run: |
+          set +x
           echo ${{ secrets.KCONFIGTEST }} | base64 --decode > /tmp/kconfig
+          set -x
+
+          # Autocorrect IP
+          export DETIPADD=`host -4 nodesite.freshbrewed.science | tail -n1 | sed 's/.* //' | tr -d '\n'`
+          sed -i "s/server: https:\/\/[^:]*:/server: https:\/\/$DETIPADD:/" /tmp/kconfig
+
+          # Test
           kubectl get nodes --insecure-skip-tls-verify --kubeconfig=/tmp/kconfig
 
           # Deploy
