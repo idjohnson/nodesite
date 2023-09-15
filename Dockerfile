@@ -7,6 +7,7 @@ RUN npm install -g pnpm
 # install dependencies
 RUN pnpm install
 COPY . .
+
 # build
 RUN pnpm build
 # remove dev dependencies

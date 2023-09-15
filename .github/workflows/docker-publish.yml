@@ -21,8 +21,32 @@ env:
 
 
 jobs:
-  build:
+  ciCheck:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      # This is used to complete the identity challenge
+      # with sigstore/fulcio when running outside of PRs.
+      id-token: write
 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+
+      - run: npm install
+
+      - run: npm run lint
+
+      - run: npm run biomecheck
+
+  build:
+    needs: ciCheck
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -95,13 +119,11 @@ jobs:
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
 
       - name: SetupDemoKConfig
+        if: ${{ github.event_name != 'pull_request' }}
         run: |
           echo ${{ secrets.KCONFIGTEST }} | base64 --decode > /tmp/kconfig
           kubectl get nodes --insecure-skip-tls-verify --kubeconfig=/tmp/kconfig
 
           # Deploy
+          kubectl delete -f ./deploy/k8sRSGH.yaml --insecure-skip-tls-verify --kubeconfig=/tmp/kconfig || true
           kubectl apply -f ./deploy/k8sRSGH.yaml --insecure-skip-tls-verify --kubeconfig=/tmp/kconfig
-
-      - name: Test
-        run: |
-          kubectl get nodes --insecure-skip-tls-verify --kubeconfig=/tmp/kconfig
